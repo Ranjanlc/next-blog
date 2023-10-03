@@ -1,12 +1,18 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const withPWA = require("next-pwa")({
+  dest: "public",
+  register: true,
+  skipWaiting: true,
+  disable: process.env.NODE_ENV === "development",
+});
+const nextConfig = withPWA({
   reactStrictMode: true,
   env: {
-    MONGO_USERNAME: 'studylc29',
-    MONGO_PW: 'Nextjs2023',
-    MONGO_CLUSTER: 'cluster0',
-    MONGO_DB: 'my-site',
+    MONGO_USERNAME: process.env.MONGO_USERNAME,
+    MONGO_PW: process.env.MONGO_PW,
+    MONGO_CLUSTER: process.env.MONGO_CLUSTER,
+    MONGO_DB: process.env.MONGO_DB,
   },
-};
+});
 
 module.exports = nextConfig;
